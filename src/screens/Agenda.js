@@ -3,14 +3,42 @@ import {
     StyleSheet,
     Text,
     View,
-    ImageBackground
+    ImageBackground,
+    FlatList
 } from 'react-native'
 import moment from 'moment'
 import 'moment/locale/pt-br'
 import todayImage from '../../assets/imgs/today.jpg'
 import commonStyles from '../CommonStyle'
+import Task from '../components/Task'
 
 export default class Agenda extends Component {
+
+    state = {
+        tasks: [
+            { id: Math.random(), desc: 'Comprar o Curso de React Native',
+                estimateAt: new Date(), doneAt: new Date() },
+            { id: Math.random(), desc: 'Concluir o Curso de React Native',
+            estimateAt: new Date(), doneAt: null },
+            { id: Math.random(), desc: 'Comprar o Curso de React Native',
+                estimateAt: new Date(), doneAt: new Date() },
+            { id: Math.random(), desc: 'Concluir o Curso de React Native',
+            estimateAt: new Date(), doneAt: null },
+            { id: Math.random(), desc: 'Comprar o Curso de React Native',
+                estimateAt: new Date(), doneAt: new Date() },
+            { id: Math.random(), desc: 'Concluir o Curso de React Native',
+            estimateAt: new Date(), doneAt: null },
+            { id: Math.random(), desc: 'Comprar o Curso de React Native',
+                estimateAt: new Date(), doneAt: new Date() },
+            { id: Math.random(), desc: 'Concluir o Curso de React Native',
+            estimateAt: new Date(), doneAt: null },
+            { id: Math.random(), desc: 'Comprar o Curso de React Native',
+                estimateAt: new Date(), doneAt: new Date() },
+            { id: Math.random(), desc: 'Concluir o Curso de React Native',
+            estimateAt: new Date(), doneAt: null },
+        ]
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -23,9 +51,8 @@ export default class Agenda extends Component {
                     </View>
                 </ImageBackground>
                 <View style={styles.tasksContainer}>
-                    <Text>Tarefa 1</Text>
-                    <Text>Tarefa 2</Text>
-                    <Text>Tarefa 3</Text>
+                    <FlatList data={this.state.tasks} keyExtractor={item => `${item.id}`} 
+                        renderItem={({ item }) => <Task {...item} />} />
                 </View>
             </View>
         )
@@ -44,14 +71,14 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
     },
     title: {
-        // fontFamily: commonStyles.fontFamily,
+        fontFamily: commonStyles.fontFamily,
         color: commonStyles.colors.secondary,
         fontSize: 50,
         marginLeft: 20,
         marginBottom: 10
     },
     subtitle: {
-        // fontFamily: commonStyles.fontFamily,
+        fontFamily: commonStyles.fontFamily,
         color: commonStyles.colors.secondary,
         fontSize: 20,
         marginLeft: 20,

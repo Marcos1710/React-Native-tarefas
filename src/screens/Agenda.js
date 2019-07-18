@@ -20,28 +20,7 @@ import AddTask from './addTasks'
 export default class Agenda extends Component {
 
     state = {
-        tasks: [
-            { id: Math.random(), desc: 'Comprar o Curso de React Native',
-                estimateAt: new Date(), doneAt: new Date() },
-            { id: Math.random(), desc: 'Concluir o Curso de React Native',
-            estimateAt: new Date(), doneAt: null },
-            { id: Math.random(), desc: 'Comprar o Curso de React Native',
-                estimateAt: new Date(), doneAt: new Date() },
-            { id: Math.random(), desc: 'Concluir o Curso de React Native',
-            estimateAt: new Date(), doneAt: null },
-            { id: Math.random(), desc: 'Comprar o Curso de React Native',
-                estimateAt: new Date(), doneAt: new Date() },
-            { id: Math.random(), desc: 'Concluir o Curso de React Native',
-            estimateAt: new Date(), doneAt: null },
-            { id: Math.random(), desc: 'Comprar o Curso de React Native',
-                estimateAt: new Date(), doneAt: new Date() },
-            { id: Math.random(), desc: 'Concluir o Curso de React Native',
-            estimateAt: new Date(), doneAt: null },
-            { id: Math.random(), desc: 'Comprar o Curso de React Native',
-                estimateAt: new Date(), doneAt: new Date() },
-            { id: Math.random(), desc: 'Concluir o Curso de React Native',
-            estimateAt: new Date(), doneAt: null },
-        ],
+        tasks: [ ],
         visibleTasks: [ ],
         showDoneTasks: true,
         showAddTask: false
@@ -56,7 +35,7 @@ export default class Agenda extends Component {
             doneAt: null
         })
 
-        this.setState({ task, showAddTask: false }, this.filterTaks )
+        this.setState({ tasks, showAddTask: false }, this.filterTaks )
     }
 
     filterTaks = () => {

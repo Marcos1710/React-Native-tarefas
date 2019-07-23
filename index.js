@@ -1,10 +1,9 @@
 import { registerRootComponent } from 'expo';
 import { activateKeepAwake } from 'expo-keep-awake';
-
-import Agenda from './src/screens/Agenda'
+import Navigator from './src/Navigator'
 
 if (__DEV__) {
   activateKeepAwake();
 }
 
-registerRootComponent(Agenda);
+registerRootComponent(() => Navigator)

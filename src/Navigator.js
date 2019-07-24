@@ -20,4 +20,5 @@ const MainRoutes = {
 const MainNavigator = createSwitchNavigator(MainRoutes, {
     initialRouteName: 'Auth'
 })
+
 export default MainNavigator

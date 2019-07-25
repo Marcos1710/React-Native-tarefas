@@ -10,6 +10,7 @@ import {
  } from 'react-native'
 import commonStyles from '../CommonStyle'
 import backgroundImage from '../../assets/imgs/login.jpg'
+import AuthInput from '../components/AuthInput'
 
 export default class Auth extends Component {
     state = {
@@ -39,13 +40,13 @@ export default class Auth extends Component {
                             'Crie a sua conta' : 'Informe seus dados'}
                     </Text>
 
-                    {this.state.stageNew && <TextInput placeholder="Nome" style={styles.input} 
+                    {this.state.stageNew && <AuthInput icon='user' placeholder="Nome" style={styles.input} 
                         value={this.state.name} onChangeText={name => this.setState({ name })} /> }
-                    <TextInput placeholder="E-mail" style={styles.input} value={this.state.email}
+                    <AuthInput icon='at' placeholder="E-mail" style={styles.input} value={this.state.email}
                         onChangeText={email => this.setState({ email })} />
-                    <TextInput placeholder="Senha" style={styles.input} value={this.state.password} 
+                    <AuthInput icon='lock' secureTextEntry={true} placeholder="Senha" style={styles.input} value={this.state.password} 
                         onChangeText={password => this.setState({ password })} />
-                    {this.state.stageNew && <TextInput placeholder="Confirma Senha" style={styles.input} 
+                    {this.state.stageNew && <AuthInput icon='asterisk' secureTextEntry={true} placeholder="Confirma Senha" style={styles.input} 
                         value={this.state.confirmPassword} 
                         onChangeText={confirmPassword => this.setState({ confirmPassword })} />}
                     <TouchableOpacity onPress={this.signinOrSingnup}>
@@ -101,6 +102,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         padding: 10,
         alignItems: 'center',
+        borderRadius: 20,
     },
     buttonText: {
         fontFamily: commonStyles.fontFamily,

@@ -1,10 +1,9 @@
+import React from 'react'
 import {
-    createSwitchNavigator,
+    createSwitchNavigator
 } from 'react-navigation'
-
 import Agenda from './screens/Agenda'
 import Auth from './screens/Auth'
-
 
 const MainRoutes = {
     Auth: {
@@ -16,6 +15,7 @@ const MainRoutes = {
         screen: Agenda
     }
 }
+
 
 const MainNavigator = createSwitchNavigator(MainRoutes, {
     initialRouteName: 'Auth'

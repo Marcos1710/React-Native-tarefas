@@ -1,24 +1,24 @@
 import React from 'react'
 import {
-    createSwitchNavigator
+    createStackNavigator,
+    createAppContainer,
 } from 'react-navigation'
+import { StyleSheet } from 'react-native'
 import Agenda from './screens/Agenda'
 import Auth from './screens/Auth'
 
-const MainRoutes = {
-    Auth: {
-        name: 'Auth',
-        screen: Auth
-    },
-    Home: {
-        name: 'Home',
-        screen: Agenda
-    }
-}
+// https://docs.expo.io/versions/latest/react-native/navigation/
 
+const Navigator = createStackNavigator({
+    Auth: {screen: Auth},
+    Home: {screen: Agenda},
+});
 
-const MainNavigator = createSwitchNavigator(MainRoutes, {
-    initialRouteName: 'Auth'
-})
+const MainNavigator = createAppContainer(Navigator);
 
 export default MainNavigator
+
+
+const styles = StyleSheet.create({
+
+})

@@ -10,8 +10,16 @@ import Auth from './screens/Auth'
 // https://docs.expo.io/versions/latest/react-native/navigation/
 
 const Navigator = createStackNavigator({
-    Auth: {screen: Auth},
-    Home: {screen: Agenda},
+    Auth: {
+        name: 'Auth',
+        screen: Auth,
+        navigationOptions: { header: null }
+    },
+    Home: {
+        name: 'Home',
+        screen: Agenda,
+        navigationOptions: { header: null }
+    },
 });
 
 const MainNavigator = createAppContainer(Navigator);

@@ -2,7 +2,6 @@ import React, { Component } from 'React'
 import { 
   Text, 
   StyleSheet,
-  TextInput,
   View, 
   ImageBackground,
   TouchableOpacity,
@@ -11,6 +10,11 @@ import {
 import commonStyles from '../CommonStyle'
 import backgroundImage from '../../assets/imgs/login.jpg'
 import AuthInput from '../components/AuthInput'
+import Axios from 'axios'
+import {
+    server,
+    showError
+} from '../Common'
 
 export default class Auth extends Component {
     state = {
@@ -21,15 +25,60 @@ export default class Auth extends Component {
         confirmPassword: '',
     }
 
+    signin = async () => {
+        try {
+            const res = await Axios.post(`${server}/signin`, {
+               email: this.state.email,
+               password: this.state.password 
+            })
+
+            Axios.defaults.headers.common['Authorization']
+                = `bearer ${res.data.token}`  
+            this.props.navigation.navigate('Home')
+        } catch (err) {
+            Alert.alert('Erro', 'Falha no Login')
+        }
+    }
+
+    Singnup = async () => {
+        try {
+            await Axios.post(`${server}/signup`, {
+                name: this.state.name,
+                email: this.state.email,
+                password: this.state.password,
+                confirmPassword: this.state.confirmPassword
+            })
+
+            Alert.alert('Sucesso!', 'Usuário cadastrado :)')
+            this.setState({ stageNew: false })
+        } catch (err) {
+            showError(err)
+        }
+    }
+
     signinOrSingnup = () => {
         if (this.state.stageNew) {
-            Alert.alert('Sucesso', 'Criar conta')
+           this.Singnup()
         } else {
-            Alert.alert('Sucesso', 'Logar')
+            this.signin()
         }
     }
 
     render() {
+        // validações para que os campos do signin estejão preenchidos para aparecer o button de logar
+        let validations = []
+        
+        validations.push(this.state.email && this.state.email.includes('@') && this.state.email.trim())
+        validations.push(this.state.password && this.state.password.length >= 3 && this.state.password.trim())
+
+        if (this.state.stageNew) {
+            validations.push(this.state.name && this.state.name.trim())
+            validations.push(this.state.confirmPassword)
+            validations.push(this.state.password === this.state.confirmPassword)
+        }
+
+        const validForm = validations.reduce((all, v) => all && v)
+
         return (
             <ImageBackground source={backgroundImage}
                 style={styles.background}>
@@ -49,8 +98,9 @@ export default class Auth extends Component {
                     {this.state.stageNew && <AuthInput icon='asterisk' secureTextEntry={true} placeholder="Confirma Senha" style={styles.input} 
                         value={this.state.confirmPassword} 
                         onChangeText={confirmPassword => this.setState({ confirmPassword })} />}
-                    <TouchableOpacity onPress={this.signinOrSingnup}>
-                        <View style={styles.button}>
+                    <TouchableOpacity onPress={this.signinOrSingnup} 
+                        disabled={!validForm}>
+                        <View style={[styles.button, !validForm ? {backgroundColor: '#AAA'} : { }] }>
                             <Text style={styles.buttonText}>
                                 {this.state.stageNew ? 'Registrar' : 'Entrar'}
                             </Text>

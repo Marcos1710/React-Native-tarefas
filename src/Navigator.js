@@ -9,6 +9,7 @@ import Agenda from './screens/Agenda'
 import Auth from './screens/Auth'
 import CommonStyles from './CommonStyle'
 import Menu from './screens/Menu'
+import AuthOrApp from './screens/AuthOrApp'
 
 // https://docs.expo.io/versions/latest/react-native/navigation/
 
@@ -62,6 +63,11 @@ const menuConfig = {
 const MenuNavigator = createDrawerNavigator(menuRoutes, menuConfig)
 
 const Navigator = createStackNavigator({
+    Loading: {
+        name: 'Loading',
+        screen: AuthOrApp,
+        navigationOptions: { header: null }
+    },
     Auth: {
         name: 'Auth',
         screen: Auth,

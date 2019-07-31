@@ -10,25 +10,43 @@ import {
 import { Gravatar } from 'react-native-gravatar'
 import { DrawerItems } from 'react-navigation'
 import commonStyles from '../CommonStyle'
+import axios from 'axios'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
-export default props => 
-    <ScrollView>
-        <View style={styles.header}>
-            <Text style={styles.title}>Tasks</Text>
-            {/* avatar do usuário */}
-            <Gravatar style={styles.avatar} options={{
-                email: props.navigation.getParam('email'),
-                secure: true
-            }} />
-            <View style={styles.userInfo}>
-                <View>
-                    <Text style={styles.name}>{props.navigation.getParam('name')}</Text>
-                    <Text style={styles.email}>{props.navigation.getParam('email')}</Text>
+export default props => {
+
+    const logout = () => {
+        delete axios.defaults.headers.common['Authorization']
+        AsyncStorage.removeItem('userData')
+        props.navigation.navigate('Loading')
+    }
+
+    return (
+        <ScrollView>
+            <View style={styles.header}>
+                <Text style={styles.title}>Tasks</Text>
+                {/* avatar do usuário */}
+                <Gravatar style={styles.avatar} options={{
+                    email: props.navigation.getParam('email'),
+                    secure: true
+                }} />
+                <View style={styles.userInfo}>
+                    <View>
+                        <Text style={styles.name}>{props.navigation.getParam('name')}</Text>
+                        <Text style={styles.email}>{props.navigation.getParam('email')}</Text>
+                    </View>
+                    <TouchableOpacity onPress={logout}>
+                        <View style={styles.logoutIcon}>
+                           <Icon name="sign-out" size={30} color='#800' />
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </View>
-        </View>
-        <DrawerItems {...props} />
-    </ScrollView>
+            <DrawerItems {...props} />
+        </ScrollView>
+    )
+}
+    
 
 
 const styles = StyleSheet.create({
@@ -73,4 +91,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
+    logoutIcon: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 20
+    }
 })

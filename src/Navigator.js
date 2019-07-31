@@ -8,6 +8,7 @@ import { StyleSheet } from 'react-native'
 import Agenda from './screens/Agenda'
 import Auth from './screens/Auth'
 import CommonStyles from './CommonStyle'
+import Menu from './screens/Menu'
 
 // https://docs.expo.io/versions/latest/react-native/navigation/
 
@@ -45,6 +46,7 @@ const menuRoutes = {
 
 const menuConfig = {
     initialRouteName: 'Today',
+    contentComponent: Menu,
     contentOptions: {
         labelStyle: {
             fontFamily: CommonStyles.fontFamily,

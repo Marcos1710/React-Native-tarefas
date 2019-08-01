@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
     Platform
 } from 'react-native'
-import moment, { months } from 'moment'
+import moment from 'moment'
 import 'moment/locale/pt-br'
 import commonStyles from '../CommonStyle'
 import Task from '../components/Task'
@@ -79,7 +79,7 @@ export default class Agenda extends Component {
 
     toggleTask = async id => {
         try {
-            await axios.put(`${server}/tasks/${id}/toggle`)
+            await Axios.put(`${server}/tasks/${id}/toggle`)
             await this.loadTasks()
         } catch (err) {
             showError(err)
